@@ -1,0 +1,46 @@
+.bg-tecnol {
+  background-color: #0035ad !important;
+}
+
+.border-top-tecnol{
+  border-top: 5px solid  #0035ad !important;
+}
+
+border-left-tecnol{
+  border-left: 5px solid #0035ad !important;
+}
+
+.tecnol-divider{
+  width: 10%;
+  height: 5px;
+  background: #0035ad;
+  border-radius: 1px;
+}
+
+.btn-tecnol{
+  color: #fff;
+  background-color: #0035ad;
+  border-color: #0035ad;
+}
+
+.btn-tecnol:hover{
+  color: #0035ad;
+  background-color: #FFF;
+  border-color: #0035ad;
+}
+
+.btn-outline-tecnol{
+  color: #0035ad;
+  border-color: #0035ad;
+}
+
+.btn-outline-tecnol:hover{
+  color: #FFF;
+  border-color: #0035ad;
+  background-color: #0035ad;
+}
+
+#usersCard{
+  height: 249px;
+  overflow: auto;
+}
