@@ -290,9 +290,7 @@ return [
     'sync_attributes' => [
 
         'email' => 'mail',
-
-        'name' => 'displayname',
-
+        'name'  => 'displayname',
         'dn'    => 'distinguishedname',
 
     ],

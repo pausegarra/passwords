@@ -9,16 +9,20 @@ use App\Models\Share;
 
 class PasswordComponent extends Component
 {
-    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [],$search;
+    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [], $search, $searchUsers, $searchGroups;
 
     protected $listeners = [
         'getMembers' => 'getMembers'
     ];
-
     protected $rules = [
         'name'          => 'required',
         'username'      => 'required',
         'inputPassword' => 'required',
+    ];
+    protected $queryString = [
+        'search'       => ['except' => ''],
+        'searchUsers'  => ['except' => ''],
+        'searchGroups' => ['except' => ''],
     ];
 
     public function savePassword(){
@@ -51,9 +55,12 @@ class PasswordComponent extends Component
             ->pluck('password_id');
         return view('livewire.passwords.password-component', [
             'passwords'     => Password::where('user_id', auth()->user()->id)
+                ->where('name', 'like', "%$this->search%")
+                ->orWhere('platform', 'like', "%$this->search%")
+                ->orWhere('username', 'like', "%$this->search%")
                 ->orWhereIn('id', $usersIDS)
                 ->orWhereIn('id', getGroupIDs())
-                ->get(),
+                ->paginate(30),
         ]);
     }
 }

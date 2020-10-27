@@ -8,7 +8,7 @@
                 </h1>
             </div>
             <div class="col-4 text-right">
-                <input type="text" placeholder="Buscar" class="form-control">
+                <input type="text" wire:model="search" placeholder="Buscar" class="form-control">
             </div>
         </div>
         @include('livewire.passwords.passwords-table')

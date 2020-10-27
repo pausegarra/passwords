@@ -38,6 +38,7 @@
                     @endif
                 </tbody>
             </table>
+            {{ $passwords->links("pagination::bootstrap-4") }}
             @if($passwords->count() == 0)
                 <div class="row">
                     <div class="col">

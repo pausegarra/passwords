@@ -47,7 +47,7 @@
                                         <a href="/profile" class="dropdown-item">Mi perfil</a>
                                       <div class="dropdown-divider"></div>
                                       <a class="dropdown-item" id="logoutBtn" href="#" onclick="event.preventDefault();
-                                      document.getElementById('logoutForm').submit();">Logout</a>
+                                      document.getElementById('logoutForm').submit();">Salir</a>
                                       <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
                                     </div>
                                   </li>
@@ -74,8 +74,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p class="mt-2 mb-0">Desarrollado por:</p>
-                                    <img src="{{ asset('img/MY_LOGO.svg') }}" width="4%">
+                                    <p class="mt-2 mb-0 text-muted">Aplicativo desarrollado por Pau Segarra i Blasco</p>
                                 </div>
                             </div>
                         </div>

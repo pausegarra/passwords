@@ -28,26 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $userDn = auth()->user()->dn;
-        // $groups = \Adldap::search()
-        //     ->groups()
-        //     ->select('dn')
-        //     ->in("OU=Dept. Informatica,ou=TECNOL,dc=tecnol,dc=es")
-        //     ->rawFilter("(member=$userDn)")
-        //     ->get();
-        // // return $groups;
-        // $passwordIDs = [];
-        // foreach($groups as $key => $group){
-        //     $ids = Share::where('name', $group['distinguishedname'][0])
-        //         ->pluck('password_id');
-        //     foreach($ids as $key => $id){
-        //         $passwordIDs[] = $id;
-        //     }
-        // }
-        $mail = Auth::user()->email;
-        return \Adldap::search()
-            ->user()
-            ->rawFilter("(mail: $mail)")
-            ->get();
+        // $groups = collect(session()->get('groups')[0]['member']);
+        // return $groups->filter(function($val,$key){
+        //     return strpos($val, 'P') !== false;
+        // });
+        return session()->get('users_ad');
     }
 }

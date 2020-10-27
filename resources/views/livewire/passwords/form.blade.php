@@ -42,12 +42,26 @@
                         <div class="col">
                             <div class="card card-body" id="usersCard">
                                 <h4>Usuarios</h4>
-                                @foreach(session()->get('users_ad') as $index => $user)
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" wire:model.defer="usersToShare" id="checkbox-{{ $user['samaccountname'][0] }}" value="{{ $user['distinguishedname'][0] }}">
-                                        <label class="custom-control-label" for="checkbox-{{ $user['samaccountname'][0] }}">{{ $user['displayname'][0] }}</label>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <input type="text" wire:model="searchUsers" class="form-control form-control-sm" placeholder="Buscar Usuarios">
                                     </div>
-                                @endforeach
+                                </div>
+                                @if (strlen($searchUsers) > 0)
+                                    @foreach(collect(session()->get('users_ad'))->filter(function($val,$key){return strpos($val['displayname'][0], $this->searchUsers) !== false;}) as $index => $user)
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" wire:model.defer="usersToShare" id="checkbox-{{ $user['samaccountname'][0] }}" value="{{ $user['distinguishedname'][0] }}">
+                                            <label class="custom-control-label" for="checkbox-{{ $user['samaccountname'][0] }}">{{ $user['displayname'][0] }}</label>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    @foreach(collect(session()->get('users_ad')) as $index => $user)
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" wire:model.defer="usersToShare" id="checkbox-{{ $user['samaccountname'][0] }}" value="{{ $user['distinguishedname'][0] }}">
+                                            <label class="custom-control-label" for="checkbox-{{ $user['samaccountname'][0] }}">{{ $user['displayname'][0] }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -58,13 +72,28 @@
                             <div class="col">
                                 <div class="card card-body" id="usersCard">
                                     <h4>Grupos</h4>
-                                    @foreach(session()->get('groups') as $index => $group)
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" wire:model.defer="groupsToShare" id="checkbox-{{ $group['cn'][0] }}" value="{{ $group['distinguishedname'][0] }}">
-                                            <label class="custom-control-label" for="checkbox-{{ $group['cn'][0] }}">{{ $group['cn'][0] }}</label>
-                                            <span class="badge badge-primary" wire:click="$emit('askMembers', '{{ $group['distinguishedname'][0] }}', '{{ $index }}')" style="cursor: pointer;"><i class="fas fa-users"></i></span>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <input type="text" wire:model="searchGroups" class="form-control form-control-sm" placeholder="Buscar Grupos">
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    @if (strlen($searchGroups) > 0)
+                                        @foreach(collect(session()->get('groups'))->filter(function($val,$key){return strpos($val['cn'][0], $this->searchGroups) !== false;}) as $index => $group)
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" wire:model.defer="groupsToShare" id="checkbox-{{ $group['cn'][0] }}" value="{{ $group['distinguishedname'][0] }}">
+                                                <label class="custom-control-label" for="checkbox-{{ $group['cn'][0] }}">{{ $group['cn'][0] }}</label>
+                                                <span class="badge badge-primary" wire:click="$emit('askMembers', '{{ $group['distinguishedname'][0] }}', '{{ $index }}')" style="cursor: pointer;"><i class="fas fa-users"></i></span>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        @foreach(session()->get('groups') as $index => $group)
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" wire:model.defer="groupsToShare" id="checkbox-{{ $group['cn'][0] }}" value="{{ $group['distinguishedname'][0] }}">
+                                                <label class="custom-control-label" for="checkbox-{{ $group['cn'][0] }}">{{ $group['cn'][0] }}</label>
+                                                <span class="badge badge-primary" wire:click="$emit('askMembers', '{{ $group['distinguishedname'][0] }}', '{{ $index }}')" style="cursor: pointer;"><i class="fas fa-users"></i></span>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
