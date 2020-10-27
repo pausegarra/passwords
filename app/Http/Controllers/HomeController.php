@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Share;
 use App\Models\Password;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -43,19 +44,10 @@ class HomeController extends Controller
         //         $passwordIDs[] = $id;
         //     }
         // }
-        $index = 0;
-        $sessionMembers = session()->get('groups');
-        $dn = "CN=Ferran,OU=Dept. Informatica,OU=TECNOL,DC=tecnol,DC=es";
-        $members = [];
-        return $sessionMembers[0]['cn'];
-
-        foreach($sessionMembers[$index]['member'] as $index => $member){
-            $ldapMember = \Adldap::search()
-                ->users()
-                ->select('displayname')
-                ->rawfilter("(distinguishedname=$member)")
-                ->first();
-            if($ldapMember) $members[] = $ldapMember['displayname'][0];
-        }
+        $mail = Auth::user()->email;
+        return \Adldap::search()
+            ->user()
+            ->rawFilter("(mail: $mail)")
+            ->get();
     }
 }

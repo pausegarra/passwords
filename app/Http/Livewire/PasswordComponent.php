@@ -9,7 +9,7 @@ use App\Models\Share;
 
 class PasswordComponent extends Component
 {
-    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [];
+    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [],$search;
 
     protected $listeners = [
         'getMembers' => 'getMembers'
