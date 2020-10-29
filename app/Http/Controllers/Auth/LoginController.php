@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/passwords';
 
     /**
      * Create a new controller instance.
@@ -41,6 +41,11 @@ class LoginController extends Controller
     }
 
     public function authenticated(Request $req, $user){
+        $userCanGod = User::canBeGod();
+        User::where('id', auth()->user()->id)
+        ->update([
+            'can_god' => (User::canBeGod()) ? true : false,
+        ]);
         session()->put('groups', User::getAuthUserGroups());
         session()->put('users_ad', User::getAdUsers());
     }

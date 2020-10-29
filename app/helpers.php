@@ -58,3 +58,10 @@ function getOwner($user_id){
     return User::where('id',$user_id)
         ->firstOrFail()['name'];
 }
+
+function changeGod($status){
+    $userMod = User::find(auth()->user()->id);
+    $userMod->god_active = $status;
+    $userMod->save();
+    auth()->setUser($userMod);
+}

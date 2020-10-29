@@ -9,10 +9,10 @@ use App\Models\Share;
 
 class PasswordComponent extends Component
 {
-    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [], $search, $searchUsers, $searchGroups;
+    public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [], $search, $searchUsers, $searchGroups, $god_active, $notas;
 
     protected $listeners = [
-        'getMembers' => 'getMembers'
+        'getMembers' => 'getMembers',
     ];
     protected $rules = [
         'name'          => 'required',
@@ -32,8 +32,9 @@ class PasswordComponent extends Component
             'name'      => $this->name,
             'username'  => $this->username,
             'password'  => encrypt($this->inputPassword),
-            'platform'  => (isset($this->platform)) ? $this->platform : '-',
-            'link'      => (isset($this->link)) ? $this->link : '-',
+            'platform'  => (isset($this->platform)) ? $this->platform : '',
+            'link'      => (isset($this->link)) ? $this->link : '',
+            'notas'     => (isset($this->notas)) ? $this->notas : '',
         ]);
         createShare($password->id, 'user', $this->usersToShare);
         createShare($password->id, 'group', $this->groupsToShare);
@@ -49,18 +50,19 @@ class PasswordComponent extends Component
         $this->emit('showMembers', $data);
     }
 
+    public function changeGod($status = ""){
+        changeGod($status);
+    }
+
     public function render()
     {
         $usersIDS = Share::where('name', auth()->user()->dn)
             ->pluck('password_id');
+        if(auth()->user()->god_active) $passwords = Password::paginate(30);
+        else $passwords = Password::UserPasswords($this->search)
+            ->paginate(30);
         return view('livewire.passwords.password-component', [
-            'passwords'     => Password::where('user_id', auth()->user()->id)
-                ->where('name', 'like', "%$this->search%")
-                ->orWhere('platform', 'like', "%$this->search%")
-                ->orWhere('username', 'like', "%$this->search%")
-                ->orWhereIn('id', $usersIDS)
-                ->orWhereIn('id', getGroupIDs())
-                ->paginate(30),
+            'passwords' => $passwords,
         ]);
     }
 }

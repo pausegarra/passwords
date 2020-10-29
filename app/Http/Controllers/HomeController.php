@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public $usersIDS;
     /**
      * Create a new controller instance.
      *
@@ -28,10 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $groups = collect(session()->get('groups')[0]['member']);
-        // return $groups->filter(function($val,$key){
-        //     return strpos($val, 'P') !== false;
-        // });
-        return session()->get('users_ad');
+        echo auth()->user()->god_active;
+        echo "<br>";
+        $userMod = User::find(auth()->user()->id);
+        $userMod->god_active = 0;
+        $userMod->save();
+        auth()->setUser($userMod);
+        echo auth()->user()->god_active;
     }
 }

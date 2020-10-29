@@ -20,8 +20,7 @@
                                 <td>{{ $password->platform }}</td>
                                 <td>{{ $password->username }}</td>
                                 <td>
-                                    @if($password->link == '-')
-                                        -
+                                    @if($password->link == '')
                                     @else
                                         <a href="{{ $password->link }}" class="btn btn-success btn-sm" target="_blank"><i class="fas fa-external-link-alt"></i></a>
                                     @endif
@@ -29,7 +28,7 @@
                                 <td class="text-left">
                                     <button class="btn btn-primary btn-sm" wire:click="$emit('showPassword', '{{ decrypt($password->password) }}')"><i class="fas fa-eye"></i></button>
                                     <a class="btn btn-warning btn-sm" href="/passwords/{{ $password->id }}"><i class="fas fa-pen-square"></i></a>
-                                    @if (isOwner($password->user_id))
+                                    @if (isOwner($password->user_id) || auth()->user()->god_active)
                                         <button class="btn btn-danger btn-sm" wire:click="delete({{ $password->id }})"><i class="fas fa-trash-alt"></i></button>
                                     @endif
                                 </td>

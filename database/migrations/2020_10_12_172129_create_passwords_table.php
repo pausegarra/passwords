@@ -21,6 +21,7 @@ class CreatePasswordsTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('link');
+            $table->string('notas');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

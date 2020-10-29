@@ -30,4 +30,17 @@ window.onload = () => {
             html: html
         })
     })
+
+    window.livewire.on('generatePassword', () => {
+        Swal.fire({
+            title           : 'Generador de contraseñas',
+            text            : 'Introduce una longitude de contraseña',
+            input           : 'text',
+            showCancelButton: true,
+        }).then((res) => {
+            if(res.isConfirmed && res.value.length > 0) {
+                
+            }
+        })
+    })
 }

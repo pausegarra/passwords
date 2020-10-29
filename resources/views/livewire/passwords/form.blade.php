@@ -22,12 +22,21 @@
             </div>
             <div class="form-group row">
                 <label for="password" class="col-3">Contraseña:</label>
-                <input type="password" wire:model.lazy="inputPassword" id="password" class="form-control col-9">
+                <div class="input-group px-0 col-9">
+                    <input type="password" wire:model.lazy="inputPassword" class="form-control">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" wire:click="$emit('generatePassword')" type="button">Generar</button>
+                    </div>
+                  </div>
                 @error('password') <span class="text-danger font-weight-bold">{{ $message }}</span> @enderror
             </div>
             <div class="form-group row">
                 <label for="link" class="col-3">Enlace al sitio:</label>
                 <input type="text" wire:model.lazy="link" id="link" class="form-control col-9">
+            </div>
+            <div class="form-group row">
+                <label for="notas" class="col-3">Notas:</label>
+                <textarea class="form-control col-9" id="notas" wire:model.lazy="notas" rows="3"></textarea>
             </div>
         </div>
         <div class="col">
@@ -48,7 +57,7 @@
                                     </div>
                                 </div>
                                 @if (strlen($searchUsers) > 0)
-                                    @foreach(collect(session()->get('users_ad'))->filter(function($val,$key){return strpos($val['displayname'][0], $this->searchUsers) !== false;}) as $index => $user)
+                                    @foreach(collect(session()->get('users_ad'))->filter(function($val,$key){return strpos($val['displayname'][0], $this->searchUsers) !== false && strpos($val['displayname'][0], auth()->user()->name !== false);}) as $index => $user)
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" wire:model.defer="usersToShare" id="checkbox-{{ $user['samaccountname'][0] }}" value="{{ $user['distinguishedname'][0] }}">
                                             <label class="custom-control-label" for="checkbox-{{ $user['samaccountname'][0] }}">{{ $user['displayname'][0] }}</label>

@@ -29,5 +29,4 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/passwords/{id}', function($id){
         return view('view-password', compact('id'));
     });
-    Route::view('/profile', 'profile');
 });

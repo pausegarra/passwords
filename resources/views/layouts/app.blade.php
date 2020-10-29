@@ -36,16 +36,11 @@
                                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                                 </li>
                             @else
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="/passwords">Passwords</a>
-                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {{ Auth()->user()->name }}
+                                      {{ auth()->user()->name }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a href="/profile" class="dropdown-item">Mi perfil</a>
-                                      <div class="dropdown-divider"></div>
                                       <a class="dropdown-item" id="logoutBtn" href="#" onclick="event.preventDefault();
                                       document.getElementById('logoutForm').submit();">Salir</a>
                                       <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
@@ -74,7 +69,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p class="mt-2 mb-0 text-muted">Aplicativo desarrollado por Pau Segarra i Blasco</p>
+                                    <p class="mt-2 mb-0 font-italic" style="font-size: 10px;">Aplicativo desarrollado por Pau Segarra i Blasco</p>
                                 </div>
                             </div>
                         </div>

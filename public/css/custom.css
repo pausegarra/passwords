@@ -41,6 +41,9 @@ border-left-tecnol{
 }
 
 #usersCard{
-  height: 249px;
+  height: 366px;
   overflow: auto;
 }
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }

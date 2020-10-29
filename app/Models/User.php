@@ -42,11 +42,13 @@ class User extends Authenticatable
     ];
 
     public static function getAdUsers(){
-        return \Adldap::search()
+        $users = \Adldap::search()
             ->users()
             ->select('dn', 'displayname', 'samaccountname')
             ->rawFilter("(memberof=CN=g_tecnol_todos,OU=Dept. Informatica,OU=TECNOL,DC=tecnol,DC=es)")
             ->get();
+        foreach($users as $key => $usuario) if(strpos($usuario['displayname'][0], auth()->user()->name) !== false) unset($users[$key]);
+        return $users;
     }
 
     public static function getAuthUserGroups(){
@@ -57,5 +59,15 @@ class User extends Authenticatable
             ->in("OU=Dept. Informatica,ou=TECNOL,dc=tecnol,dc=es")
             ->rawFilter("(member=$userDn)")
             ->get();
+    }
+
+    public static function canBeGod(){
+        $mail = auth()->user()->email;
+        $user = \Adldap::search()
+            ->users()
+            ->select('dn', 'displayname', 'samaccountname')
+            ->rawFilter("(&(memberof=CN=g_tecnol_todos,OU=Dept. Informatica,OU=TECNOL,DC=tecnol,DC=es)(mail=$mail))")
+            ->get();
+        return $user->count();
     }
 }

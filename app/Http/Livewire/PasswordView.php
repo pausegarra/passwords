@@ -8,10 +8,10 @@ use App\Models\Share;
 
 class PasswordView extends Component
 {
-    public $password_id,$name,$username,$platform,$password,$link,$usersToShare = [],$groupsToShare = [],$user_id,$inputPassword;
+    public $password_id,$name,$username,$platform,$password,$link,$usersToShare = [],$groupsToShare = [],$user_id,$inputPassword, $searchUsers, $searchGroups, $notas;
 
     protected $listeners = [
-        'getMembers' => 'getMembers'
+        'getMembers'       => 'getMembers',
     ];
 
     public function mount($id){
@@ -25,6 +25,7 @@ class PasswordView extends Component
             'platform'      => $password->platform,
             'password'      => $password->password,
             'link'          => $password->link,
+            'notas'         => $password->notas,
             'user_id'       => $password->user_id,
             'usersToShare'  => $usersToShare,
             'groupsToShare' => $groupsToShare,
@@ -41,6 +42,10 @@ class PasswordView extends Component
         return redirect('/passwords');
     }
 
+    public function changeGod($status){
+        changeGod($status);
+    }
+
     public function savePassword(){
         $oldPass = Password::where('id',$this->password_id)
             ->firstOrFail();
@@ -49,6 +54,7 @@ class PasswordView extends Component
             'username' => $this->username,
             'link'     => $this->link,
             'platform' => $this->platform,
+            'notas'    => $this->notas,
         ]);
         if(strlen($this->inputPassword) > 0){
             $oldPass->password = encrypt($this->inputPassword);
