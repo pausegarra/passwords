@@ -143,7 +143,7 @@ return [
                 |
                 */
 
-                'hosts' => explode(' ', env('LDAP_HOSTS', 'srv-dc01.tecnol.es')),
+                'hosts' => explode(' ', env('LDAP_HOSTS', 'example.com')),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -183,7 +183,7 @@ return [
                 |
                 */
 
-                'base_dn' => env('LDAP_BASE_DN', 'dc=tecnol,dc=es'),
+                'base_dn' => env('LDAP_BASE_DN', 'dc=example,dc=com'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -198,8 +198,8 @@ return [
                 |
                 */
 
-                'username' => env('LDAP_USERNAME', 'passwords'),
-                'password' => env('LDAP_PASSWORD', 'qQ49hqjLHjIp'),
+                'username' => env('LDAP_USERNAME', 'user'),
+                'password' => env('LDAP_PASSWORD', 'secret'),
 
                 /*
                 |--------------------------------------------------------------------------
