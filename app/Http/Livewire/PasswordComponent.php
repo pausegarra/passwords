@@ -70,17 +70,13 @@ class PasswordComponent extends Component
         session()->put('users_ad', User::getAdUsers());
     }
 
-    public function updatingSearch(){
-        $this->resetPage();
-    }
-
     public function render()
     {
         $usersIDS = Share::where('name', auth()->user()->dn)
             ->pluck('password_id');
-        if(auth()->user()->god_active) $this->passwords = Password::paginate(30);
-        else $this->passwords = Password::UserPasswords($this->search)
-            ->paginate(30);
+        if(auth()->user()->god_active) $this->passwords = Password::get();
+        else $this->passwords = Password::UserPasswords()
+            ->get();
         return view('livewire.passwords.password-component', [
             'passwords' => $this->passwords,
         ]);

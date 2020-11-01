@@ -14,7 +14,13 @@
                 </thead>
                 <tbody>
                     @if($passwords->count() > 0)
-                        @foreach ($passwords as $password)
+                        @foreach ($passwords->filter(function($val,$key){
+                            if(strlen($this->search) > 0){
+                                return strpos($val,$this->search) !== false;
+                            }else{
+                                return true;
+                            }
+                        }) as $password)
                             <tr>
                                 <td>{{ $password->name }}</td>
                                 <td>{{ $password->platform }}</td>
@@ -37,7 +43,7 @@
                     @endif
                 </tbody>
             </table>
-            {{ $passwords->links("pagination::bootstrap-4") }}
+            {{-- {{ $passwords->links("pagination::bootstrap-4") }} --}}
             @if($passwords->count() == 0)
                 <div class="row">
                     <div class="col">

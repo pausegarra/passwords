@@ -53,5 +53,8 @@ class HomeController extends Controller
         //     $newPassword[$key]['password'] = decrypt($password->password);
         // }
         // file_put_contents('old_passwords_2.json',json_encode($newPassword));
+        return Password::all()->filter(function($val,$key){
+            return strpos($val,'expansion') !== false;
+        });
     }
 }
