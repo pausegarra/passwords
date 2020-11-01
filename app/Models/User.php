@@ -45,7 +45,7 @@ class User extends Authenticatable
         $users = \Adldap::search()
             ->users()
             ->select('dn', 'displayname', 'samaccountname')
-            ->rawFilter("(memberof=CN=g_tecnol_todos,OU=Dept. Informatica,OU=TECNOL,DC=tecnol,DC=es)")
+            ->rawFilter("(memberof=CN=acl_passwords,OU=passwords,OU=_ACL,ou=TECNOL,dc=tecnol,dc=es)")
             ->get();
         foreach($users as $key => $usuario) if(strpos($usuario['displayname'][0], auth()->user()->name) !== false) unset($users[$key]);
         return $users;
@@ -56,7 +56,7 @@ class User extends Authenticatable
         return \Adldap::search()
             ->groups()
             ->select('dn', 'cn', 'member')
-            ->in("OU=Dept. Informatica,ou=TECNOL,dc=tecnol,dc=es")
+            ->in("OU=SHARE_GROUPS,OU=passwords,OU=_ACL,ou=TECNOL,dc=tecnol,dc=es")
             ->rawFilter("(member=$userDn)")
             ->get();
     }
@@ -66,7 +66,7 @@ class User extends Authenticatable
         $user = \Adldap::search()
             ->users()
             ->select('dn', 'displayname', 'samaccountname')
-            ->rawFilter("(&(memberof=CN=g_tecnol_todos,OU=Dept. Informatica,OU=TECNOL,DC=tecnol,DC=es)(mail=$mail))")
+            ->rawFilter("(&(memberof=CN=acl_passwords_god,OU=passwords,OU=_ACL,ou=TECNOL,dc=tecnol,dc=es)(mail=$mail))")
             ->get();
         return $user->count();
     }

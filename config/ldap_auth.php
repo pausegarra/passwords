@@ -72,6 +72,7 @@ return [
         // Allows only manually imported users to authenticate.
 
         // Adldap\Laravel\Validation\Rules\OnlyImported::class,
+        App\Rules\CanAccess::class,
 
     ],
 
@@ -98,7 +99,6 @@ return [
         // Only allows users with a uid to authenticate.
         // Suitable when using OpenLDAP.
         // Adldap\Laravel\Scopes\UidScope::class,
-
     ],
 
     'identifiers' => [

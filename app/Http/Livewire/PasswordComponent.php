@@ -10,9 +10,11 @@ use App\Models\Share;
 class PasswordComponent extends Component
 {
     public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [], $search, $searchUsers, $searchGroups, $god_active, $notas;
-
+    private $passwords;
+    
     protected $listeners = [
-        'getMembers' => 'getMembers',
+        'getMembers'  => 'getMembers',
+        'genPassword' => 'genPassword',
     ];
     protected $rules = [
         'name'          => 'required',
@@ -54,15 +56,26 @@ class PasswordComponent extends Component
         changeGod($status);
     }
 
+    public function genPassword($length){
+        $password            = generateRandomPassword($length);
+        $this->inputPassword = $password;
+        $this->emit('showPassword', $password);
+    }
+
+    public function refreshADInfo(){
+        session()->put('groups', User::getAuthUserGroups());
+        session()->put('users_ad', User::getAdUsers());
+    }
+
     public function render()
     {
         $usersIDS = Share::where('name', auth()->user()->dn)
             ->pluck('password_id');
-        if(auth()->user()->god_active) $passwords = Password::paginate(30);
-        else $passwords = Password::UserPasswords($this->search)
+        if(auth()->user()->god_active) $this->passwords = Password::paginate(30);
+        else $this->passwords = Password::UserPasswords($this->search)
             ->paginate(30);
         return view('livewire.passwords.password-component', [
-            'passwords' => $passwords,
+            'passwords' => $this->passwords,
         ]);
     }
 }

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mb-5">
     <div class="col">
         <div class="card card-body">
             @include('livewire.passwords.passwords-form')

@@ -2,6 +2,7 @@
 
 use App\Models\Share;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 function getADMembers($groupDN, $index){
     $sessionMembers = session()->get('groups')[$index];
@@ -64,4 +65,8 @@ function changeGod($status){
     $userMod->god_active = $status;
     $userMod->save();
     auth()->setUser($userMod);
+}
+
+function generateRandomPassword($length){
+    return Str::random($length);
 }

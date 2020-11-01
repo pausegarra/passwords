@@ -198,8 +198,8 @@ return [
                 |
                 */
 
-                'username' => env('LDAP_USERNAME', 'sistemas'),
-                'password' => env('LDAP_PASSWORD', 'Inform@tic@!@'),
+                'username' => env('LDAP_USERNAME', 'passwords'),
+                'password' => env('LDAP_PASSWORD', 'qQ49hqjLHjIp'),
 
                 /*
                 |--------------------------------------------------------------------------

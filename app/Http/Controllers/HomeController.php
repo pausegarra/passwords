@@ -8,6 +8,7 @@ use App\Models\Share;
 use App\Models\Password;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,12 +30,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        echo auth()->user()->god_active;
-        echo "<br>";
-        $userMod = User::find(auth()->user()->id);
-        $userMod->god_active = 0;
-        $userMod->save();
-        auth()->setUser($userMod);
-        echo auth()->user()->god_active;
+        $passwords = file_get_contents('old_passwords.json');
+        $passwords = json_decode($passwords, true);
+        $shareDN   = 'CN=IT,OU=SHARE_GROUPS,OU=passwords,OU=_ACL,OU=TECNOL,DC=tecnol,DC=es';
+        foreach($passwords as $key => $password){
+            Password::create([
+                'user_id'  => auth()->user()->id,
+                'name'     => $password['platform'],
+                'platform' => '',
+                'username' => $password['username'],
+                'password' => encrypt($password['password']),
+                'link'     => '',
+                'notas'    => '',
+            ]);
+        }
     }
 }

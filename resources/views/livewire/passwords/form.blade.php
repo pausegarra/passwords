@@ -9,12 +9,12 @@
             <div class="form-group row">
                 <label for="name" class="col-3">Nombre:</label>
                 <input type="text" wire:model.lazy="name" id="name" class="form-control col-9">
-                @error('name') <span class="text-danger font-weight-bold">{{ $message }}</span> @enderror
+                @error('name') <span class="text-danger font-weight-bold text-center w-100">{{ $message }}</span> @enderror
             </div>
             <div class="form-group row">
                 <label for="username" class="col-3">Usuario:</label>
                 <input type="text" wire:model.lazy="username" id="username" class="form-control col-9">
-                @error('username') <span class="text-danger font-weight-bold">{{ $message }}</span> @enderror
+                @error('username') <span class="text-danger font-weight-bold text-center w-100">{{ $message }}</span> @enderror
             </div>
             <div class="form-group row">
                 <label for="platform" class="col-3">Plataforma:</label>
@@ -27,8 +27,8 @@
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" wire:click="$emit('generatePassword')" type="button">Generar</button>
                     </div>
-                  </div>
-                @error('password') <span class="text-danger font-weight-bold">{{ $message }}</span> @enderror
+                </div>
+                @error('inputPassword') <span class="text-danger font-weight-bold text-center w-100">El campo contraseña es obligatorio</span> @enderror
             </div>
             <div class="form-group row">
                 <label for="link" class="col-3">Enlace al sitio:</label>
@@ -42,7 +42,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <h3>Compartir con</h3>
+                    <h3>Compartir con  <button class="btn btn-outline-tecnol btn-sm" wire:click.prevent="refreshADInfo" title="Actualiza información desde Active Directory"><i class="fas fa-sync"></i></button></h3>
                 </div>
             </div>
             <div class="row">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 @if (strlen($searchUsers) > 0)
-                                    @foreach(collect(session()->get('users_ad'))->filter(function($val,$key){return strpos($val['displayname'][0], $this->searchUsers) !== false && strpos($val['displayname'][0], auth()->user()->name !== false);}) as $index => $user)
+                                    @foreach(collect(session()->get('users_ad'))->filter(function($val,$key){return strpos($val['displayname'][0], $this->searchUsers) !== false;}) as $index => $user)
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" wire:model.defer="usersToShare" id="checkbox-{{ $user['samaccountname'][0] }}" value="{{ $user['distinguishedname'][0] }}">
                                             <label class="custom-control-label" for="checkbox-{{ $user['samaccountname'][0] }}">{{ $user['displayname'][0] }}</label>
@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card card-body" id="usersCard">
-                                    <h4>Grupos</h4>
+                                    <h4>Grupos <button class="btn btn-outline-tecnol btn-sm" style="font-size: 12px;" wire:click.prevent="$emit('showNewGroupInfo')">Solicitar nuevo</button></h4>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <input type="text" wire:model="searchGroups" class="form-control form-control-sm" placeholder="Buscar Grupos">

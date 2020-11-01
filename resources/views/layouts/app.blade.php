@@ -11,7 +11,7 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -58,20 +58,12 @@
         </main>
 
         @if (!Request::is('login'))
-            <footer class="page-footer font-small pt-4 fixed-bottom">
+            <footer class="page-footer font-small pt-4 sticky-bottom">
                 <div class="footer-copyright text-center bg-tecnol py-3 text-white">
-                    <div class="row">
+                    <div class="row" style="max-width: 100%;">
                         <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    TQ TECNOL S.A.U. &copy; 2020
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="mt-2 mb-0 font-italic" style="font-size: 10px;">Aplicativo desarrollado por Pau Segarra i Blasco</p>
-                                </div>
-                            </div>
+                            <p>TQ TECNOL S.A.U. &copy; 2020</p>
+                            <p class="mt-2 mb-0 font-italic" style="font-size: 10px;">Aplicativo desarrollado por Pau Segarra i Blasco</p>
                         </div>
                     </div>
                 </div>
