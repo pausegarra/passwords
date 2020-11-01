@@ -6,9 +6,12 @@ use Livewire\Component;
 use App\Models\Password;
 use App\Models\User;
 use App\Models\Share;
+use Livewire\WithPagination;
 
 class PasswordComponent extends Component
 {
+    use WithPagination;
+
     public $name, $inputPassword, $platform, $username, $link, $usersToShare = [], $groupsToShare = [], $search, $searchUsers, $searchGroups, $god_active, $notas;
     private $passwords;
     
@@ -65,6 +68,10 @@ class PasswordComponent extends Component
     public function refreshADInfo(){
         session()->put('groups', User::getAuthUserGroups());
         session()->put('users_ad', User::getAdUsers());
+    }
+
+    public function updatingSearch(){
+        $this->resetPage();
     }
 
     public function render()

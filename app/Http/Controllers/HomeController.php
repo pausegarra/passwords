@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         // $passwords = file_get_contents('old_passwords_2.json');
         // $passwords = json_decode($passwords, true);
-        // $shareDN   = 'CN=Marketing,OU=SHARE_GROUPS,OU=passwords,OU=_ACL,OU=TECNOL,DC=tecnol,DC=es';
+        // $shareDN   = 'CN=MK,OU=SHARE_GROUPS,OU=passwords,OU=_ACL,OU=TECNOL,DC=tecnol,DC=es';
         // foreach($passwords as $key => $password){
         //     Password::create([
         //         'user_id'  => auth()->user()->id,
@@ -45,13 +45,13 @@ class HomeController extends Controller
         //     ]);
         // }
 
-        $passwords = Password::where('user_id',2)
-            ->get();
-        foreach($passwords as $key => $password){
-            $newPassword[$key]['platform'] = $password->plataforma;
-            $newPassword[$key]['username'] = $password->usuario;
-            $newPassword[$key]['password'] = decrypt($password->password);
-        }
-        file_put_contents('old_passwords_2.json',json_encode($newPassword));
+        // $passwords = Password::where('user_id',2)
+        //     ->get();
+        // foreach($passwords as $key => $password){
+        //     $newPassword[$key]['platform'] = $password->plataforma;
+        //     $newPassword[$key]['username'] = $password->usuario;
+        //     $newPassword[$key]['password'] = decrypt($password->password);
+        // }
+        // file_put_contents('old_passwords_2.json',json_encode($newPassword));
     }
 }
