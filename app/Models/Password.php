@@ -18,10 +18,12 @@ class Password extends Model
             ->pluck('password_id');
         $this->search = $search;
         return $query->where('user_id', auth()->user()->id)
-            ->where('name', 'like', "%$this->search%")
-            ->orWhere('platform', 'like', "%$this->search%")
-            ->orWhere('username', 'like', "%$this->search%")
-            ->orWhere(function($query){
+            ->where(function($query){
+                $query->where('name', 'like', "%$this->search%")
+                    ->orWhere('platform', 'like', "%$this->search%")
+                    ->orWhere('username', 'like', "%$this->search%")
+                    ->get();
+            })->orWhere(function($query){
                 $query->whereIn('id', $this->usersIDS)
                     ->whereIn('id', getGroupIDs())
                     ->get();
