@@ -11,8 +11,8 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 ## Autores ✒️
 
-* **Pau Segarra** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
+* **Pau Segarra** - *Trabajo Inicial* - [Pau Segarra](https://github.com/pausegarra)
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia (MIT) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
