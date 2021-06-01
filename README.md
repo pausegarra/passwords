@@ -12,6 +12,9 @@ _Gestor de contraseñas desarrollado con Laravel e integrado con Active Director
 * Gestionar acceso a la aplicación mediante LDAP.
 * Gestionar los grupos de usuarios mediante LDAP.
 * Permite compartir contraseñas con otros usuarios o grupos.
+* Modo Dios, permite ver todas las contraseñas, gestionado por LDAP.
+
+_Esta programado para trabajar con un servidor LDAP, aunque se puede implementar para trabajar con autenticacion local facilmente._
 
 ## Autores ✒️
 
