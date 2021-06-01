@@ -11,7 +11,7 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 ## Autores ✒️
 
-* **Pau Segarra** - *Trabajo Inicial* - [Pau Segarra](https://github.com/pausegarra)
+* [Pau Segarra](https://github.com/pausegarra)
 
 ## Licencia 📄
 
