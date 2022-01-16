@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card card-body" id="usersCard">
-                                    <h4>Grupos <button class="btn btn-outline-tecnol btn-sm" style="font-size: 12px;" wire:click.prevent="$emit('showNewGroupInfo')">Solicitar nuevo</button></h4>
+                                    <h4>Grupos {{-- <button class="btn btn-outline-tecnol btn-sm" style="font-size: 12px;" wire:click.prevent="$emit('showNewGroupInfo')">Solicitar nuevo</button> --}}</h4>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <input type="text" wire:model="searchGroups" class="form-control form-control-sm" placeholder="Buscar Grupos">

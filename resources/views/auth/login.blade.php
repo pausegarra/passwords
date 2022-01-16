@@ -6,10 +6,10 @@
         <div class="col">
             <div class="row mt-5">
                 <div class="col text-center">
-                    <img src="{{ asset('img/LOGO_PASSWORDS_0035AD.svg') }}" width="25%" alt="">
+                    <img src="{{ asset('img/logo_mayop.png') }}" width="25%" alt="">
                     <div class="row mt-2">
                         <div class="col-4 mx-auto">
-                            <div class="card card-body border-top-tecnol rounded-top">
+                            <div class="card card-body rounded-top">
                                 <h1 class="text-center">Entrar</h1>
                                 <form action="{{ route('login') }}" method="POST">
                                     @csrf
@@ -30,7 +30,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-tecnol btn-block">Entrar</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                                     </div>
                                 </form>
                             </div>

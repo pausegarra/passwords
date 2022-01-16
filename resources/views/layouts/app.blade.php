@@ -21,10 +21,10 @@
 <body>
     <div id="app">
         @if (!Request::is('login'))
-            <nav class="navbar navbar-expand-lg navbar-dark bg-tecnol static-top">
+            <nav class="navbar navbar-expand-lg navbar-light border-bottom bg-light static-top">
                 <div class="container">
                     <a class="navbar-brand" href="/">
-                        <img src="{{ asset('img/LOGO_PASSWORDS_FFFFFF.svg') }}" height="40px" alt="">
+                        <img src="{{ asset('img/logo_mayop.png') }}" height="40px" alt="">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -59,10 +59,10 @@
 
         @if (!Request::is('login'))
             <footer class="page-footer font-small pt-4 sticky-bottom">
-                <div class="footer-copyright text-center bg-tecnol py-3 text-white">
+                <div class="footer-copyright text-center bg-light py-3 text-dark border-top">
                     <div class="row" style="max-width: 100%;">
                         <div class="col">
-                            <p>TQ TECNOL S.A.U. &copy; 2020</p>
+                            <p>EDICIONES MAYO S.A. &copy; {{ now()->year }}</p>
                             <p class="mt-2 mb-0 font-italic" style="font-size: 10px;">Aplicativo desarrollado por Pau Segarra i Blasco</p>
                         </div>
                     </div>
